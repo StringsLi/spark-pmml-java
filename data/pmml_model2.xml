@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header>
+		<Application name="JPMML-SparkML" version="1.4.6"/>
+		<Timestamp>2020-11-24T03:45:31Z</Timestamp>
+	</Header>
+	<DataDictionary>
+		<DataField name="age" optype="continuous" dataType="double"/>
+		<DataField name="hypertension" optype="continuous" dataType="double"/>
+		<DataField name="heart_disease" optype="continuous" dataType="double"/>
+		<DataField name="bmi_full" optype="continuous" dataType="double"/>
+		<DataField name="stroke" optype="categorical" dataType="integer">
+			<Value value="0"/>
+			<Value value="1"/>
+		</DataField>
+	</DataDictionary>
+	<TreeModel functionName="classification" missingValueStrategy="nullPrediction" splitCharacteristic="multiSplit">
+		<MiningSchema>
+			<MiningField name="stroke" usageType="target"/>
+			<MiningField name="age"/>
+			<MiningField name="hypertension"/>
+			<MiningField name="heart_disease"/>
+			<MiningField name="bmi_full"/>
+		</MiningSchema>
+		<Output>
+			<OutputField name="pmml(prediction)" optype="categorical" dataType="integer" feature="predictedValue"/>
+			<OutputField name="prediction" optype="categorical" dataType="double" feature="transformedValue">
+				<MapValues outputColumn="data:output">
+					<FieldColumnPair field="pmml(prediction)" column="data:input"/>
+					<InlineTable>
+						<row>
+							<data:input>0</data:input>
+							<data:output>0</data:output>
+						</row>
+						<row>
+							<data:input>1</data:input>
+							<data:output>1</data:output>
+						</row>
+					</InlineTable>
+				</MapValues>
+			</OutputField>
+			<OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+			<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+		</Output>
+		<Node>
+			<True/>
+			<Node>
+				<SimplePredicate field="age" operator="lessOrEqual" value="67.5"/>
+				<Node>
+					<SimplePredicate field="age" operator="lessOrEqual" value="53.5"/>
+					<Node>
+						<SimplePredicate field="age" operator="lessOrEqual" value="44.5"/>
+						<Node>
+							<SimplePredicate field="age" operator="lessOrEqual" value="34.5"/>
+							<Node score="0" recordCount="8802.0">
+								<SimplePredicate field="age" operator="lessOrEqual" value="27.5"/>
+								<ScoreDistribution value="0" recordCount="8801.0"/>
+								<ScoreDistribution value="1" recordCount="1.0"/>
+							</Node>
+							<Node score="0" recordCount="2677.0">
+								<True/>
+								<ScoreDistribution value="0" recordCount="2674.0"/>
+								<ScoreDistribution value="1" recordCount="3.0"/>
+							</Node>
+						</Node>
+						<Node score="0" recordCount="3975.0">
+							<SimplePredicate field="heart_disease" operator="lessOrEqual" value="0.5"/>
+							<ScoreDistribution value="0" recordCount="3958.0"/>
+							<ScoreDistribution value="1" recordCount="17.0"/>
+						</Node>
+						<Node score="0" recordCount="40.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="39.0"/>
+							<ScoreDistribution value="1" recordCount="1.0"/>
+						</Node>
+					</Node>
+					<Node>
+						<SimplePredicate field="hypertension" operator="lessOrEqual" value="0.5"/>
+						<Node score="0" recordCount="1623.0">
+							<SimplePredicate field="bmi_full" operator="lessOrEqual" value="28.602519195002273"/>
+							<ScoreDistribution value="0" recordCount="1612.0"/>
+							<ScoreDistribution value="1" recordCount="11.0"/>
+						</Node>
+						<Node score="0" recordCount="2252.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="2223.0"/>
+							<ScoreDistribution value="1" recordCount="29.0"/>
+						</Node>
+					</Node>
+					<Node score="0" recordCount="434.0">
+						<SimplePredicate field="heart_disease" operator="lessOrEqual" value="0.5"/>
+						<ScoreDistribution value="0" recordCount="425.0"/>
+						<ScoreDistribution value="1" recordCount="9.0"/>
+					</Node>
+					<Node score="0" recordCount="32.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="29.0"/>
+						<ScoreDistribution value="1" recordCount="3.0"/>
+					</Node>
+				</Node>
+				<Node>
+					<SimplePredicate field="heart_disease" operator="lessOrEqual" value="0.5"/>
+					<Node>
+						<SimplePredicate field="bmi_full" operator="lessOrEqual" value="41.05"/>
+						<Node score="0" recordCount="1478.0">
+							<SimplePredicate field="bmi_full" operator="lessOrEqual" value="27.05"/>
+							<ScoreDistribution value="0" recordCount="1459.0"/>
+							<ScoreDistribution value="1" recordCount="19.0"/>
+						</Node>
+						<Node score="0" recordCount="3524.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="3425.0"/>
+							<ScoreDistribution value="1" recordCount="99.0"/>
+						</Node>
+					</Node>
+					<Node score="0" recordCount="245.0">
+						<SimplePredicate field="bmi_full" operator="lessOrEqual" value="44.75"/>
+						<ScoreDistribution value="0" recordCount="244.0"/>
+						<ScoreDistribution value="1" recordCount="1.0"/>
+					</Node>
+					<Node score="0" recordCount="244.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="244.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+				</Node>
+				<Node>
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="22.85"/>
+					<Node score="0" recordCount="14.0">
+						<SimplePredicate field="age" operator="lessOrEqual" value="64.5"/>
+						<ScoreDistribution value="0" recordCount="14.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+					<Node score="1" recordCount="4.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="1.0"/>
+						<ScoreDistribution value="1" recordCount="3.0"/>
+					</Node>
+				</Node>
+				<Node score="0" recordCount="111.0">
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="28.602519195002273"/>
+					<ScoreDistribution value="0" recordCount="108.0"/>
+					<ScoreDistribution value="1" recordCount="3.0"/>
+				</Node>
+				<Node score="0" recordCount="345.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="322.0"/>
+					<ScoreDistribution value="1" recordCount="23.0"/>
+				</Node>
+			</Node>
+			<Node>
+				<SimplePredicate field="age" operator="lessOrEqual" value="77.5"/>
+				<Node>
+					<SimplePredicate field="heart_disease" operator="lessOrEqual" value="0.5"/>
+					<Node>
+						<SimplePredicate field="age" operator="lessOrEqual" value="73.5"/>
+						<Node score="0" recordCount="460.0">
+							<SimplePredicate field="bmi_full" operator="lessOrEqual" value="27.05"/>
+							<ScoreDistribution value="0" recordCount="453.0"/>
+							<ScoreDistribution value="1" recordCount="7.0"/>
+						</Node>
+						<Node score="0" recordCount="1062.0">
+							<True/>
+							<ScoreDistribution value="0" recordCount="1017.0"/>
+							<ScoreDistribution value="1" recordCount="45.0"/>
+						</Node>
+					</Node>
+					<Node score="0" recordCount="437.0">
+						<SimplePredicate field="bmi_full" operator="lessOrEqual" value="28.75"/>
+						<ScoreDistribution value="0" recordCount="398.0"/>
+						<ScoreDistribution value="1" recordCount="39.0"/>
+					</Node>
+					<Node score="0" recordCount="377.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="363.0"/>
+						<ScoreDistribution value="1" recordCount="14.0"/>
+					</Node>
+				</Node>
+				<Node>
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="25.35"/>
+					<Node score="0" recordCount="32.0">
+						<SimplePredicate field="bmi_full" operator="lessOrEqual" value="23.45"/>
+						<ScoreDistribution value="0" recordCount="29.0"/>
+						<ScoreDistribution value="1" recordCount="3.0"/>
+					</Node>
+					<Node score="0" recordCount="27.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="27.0"/>
+						<ScoreDistribution value="1" recordCount="0.0"/>
+					</Node>
+				</Node>
+				<Node score="0" recordCount="152.0">
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="28.75"/>
+					<ScoreDistribution value="0" recordCount="130.0"/>
+					<ScoreDistribution value="1" recordCount="22.0"/>
+				</Node>
+				<Node score="0" recordCount="206.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="189.0"/>
+					<ScoreDistribution value="1" recordCount="17.0"/>
+				</Node>
+			</Node>
+			<Node>
+				<SimplePredicate field="heart_disease" operator="lessOrEqual" value="0.5"/>
+				<Node>
+					<SimplePredicate field="hypertension" operator="lessOrEqual" value="0.5"/>
+					<Node score="0" recordCount="683.0">
+						<SimplePredicate field="bmi_full" operator="lessOrEqual" value="28.602519195002273"/>
+						<ScoreDistribution value="0" recordCount="635.0"/>
+						<ScoreDistribution value="1" recordCount="48.0"/>
+					</Node>
+					<Node score="0" recordCount="506.0">
+						<True/>
+						<ScoreDistribution value="0" recordCount="459.0"/>
+						<ScoreDistribution value="1" recordCount="47.0"/>
+					</Node>
+				</Node>
+				<Node score="0" recordCount="226.0">
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="30.05"/>
+					<ScoreDistribution value="0" recordCount="194.0"/>
+					<ScoreDistribution value="1" recordCount="32.0"/>
+				</Node>
+				<Node score="0" recordCount="98.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="91.0"/>
+					<ScoreDistribution value="1" recordCount="7.0"/>
+				</Node>
+			</Node>
+			<Node>
+				<SimplePredicate field="bmi_full" operator="lessOrEqual" value="25.35"/>
+				<Node score="0" recordCount="12.0">
+					<SimplePredicate field="bmi_full" operator="lessOrEqual" value="19.35"/>
+					<ScoreDistribution value="0" recordCount="12.0"/>
+					<ScoreDistribution value="1" recordCount="0.0"/>
+				</Node>
+				<Node score="0" recordCount="107.0">
+					<True/>
+					<ScoreDistribution value="0" recordCount="97.0"/>
+					<ScoreDistribution value="1" recordCount="10.0"/>
+				</Node>
+			</Node>
+			<Node score="0" recordCount="163.0">
+				<SimplePredicate field="bmi_full" operator="lessOrEqual" value="30.05"/>
+				<ScoreDistribution value="0" recordCount="133.0"/>
+				<ScoreDistribution value="1" recordCount="30.0"/>
+			</Node>
+			<Node score="0" recordCount="100.0">
+				<True/>
+				<ScoreDistribution value="0" recordCount="91.0"/>
+				<ScoreDistribution value="1" recordCount="9.0"/>
+			</Node>
+		</Node>
+	</TreeModel>
+</PMML>
